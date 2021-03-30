@@ -22,9 +22,10 @@ class Unit:
         self.team=team
 class Hero(Unit):
     #class Hero
-    def __init__(self,id,team,lvl=1):
+    def __init__(self,name_hero,id,team,lvl=1):
         Unit.__init__(self,id,team)
         self.lvl=lvl
+        self.name_hero=name_hero
     def lvl_up(self):
         #method of increasing the level
         self.lvl+=1
