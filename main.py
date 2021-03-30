@@ -37,15 +37,7 @@ class Soldier(Unit):
         #method going fo the hero
         self.gofh=True
 
-'''
-def coin():
-    #function coin for random
-    b = random.randint(1,4)
-    if b % 2 == 0:
-        return (True)
-    else:
-        return (False)
-'''
+
 def belonging_to_the_teem():
     #belonging to the team GDI or NOD
     b = random.randint(1, 4)
@@ -69,17 +61,14 @@ generalNOD=Hero(int(uuid.uuid4()),'NOD')
 number_of_soldiers=100
 list_NOD=[]             #list team Nod
 list_GDI=[]             #list team GDI
-list_soldiers=[Soldier(int(uuid.uuid4()),belonging_to_the_teem()) for i in range(number_of_soldiers)] #list all soldier
-'''
-for i in range(number_of_soldiers):
-    list_soldiers.append(Soldier(int(uuid.uuid4()),belonging_to_the_teem()))
-'''
-for k in range(len(list_soldiers)):
+
+for k in range(number_of_soldiers):
     #distribute soldiers to team NOD or GDI
-    if list_soldiers[k].team=='NOD':
-        list_NOD.append(list_soldiers[k])
+    s=Soldier(int(uuid.uuid4()),belonging_to_the_teem())
+    if s.team=='NOD':
+        list_NOD.append(s)
     else:
-        list_GDI.append(list_soldiers[k])
+        list_GDI.append(s)
 
 length_NOD=len(list_NOD)
 length_GDI=len(list_GDI)
