@@ -12,52 +12,49 @@
 Отправьте одного из солдат первого героя следовать за ним. Выведите на экран идентификационные номера
 этих двух юнитов.
 '''
+''''''
 import random
 import uuid
 
 class Unit:
     # parent class Unit
-    def __init__(self,id,team):
+    def __init__(self,id,team_name):
         self.id=id
-        self.team=team
+        self.team_name=team_name
 class Hero(Unit):
     #class Hero
-    def __init__(self,id,team,lvl=1):
-        Unit.__init__(self,id,team)
+    def __init__(self,id,team_name,lvl=1):
+        Unit.__init__(self,id,team_name)
         self.lvl=lvl
-        self.team=team
-        n=Teams(team)
-        teams_list.append(n)
+        self.team_name=team_name
+        self.team=Team(team_name)
+
     def lvl_up(self):
         #method of increasing the level
         self.lvl+=1
 
 class Soldier(Unit):
     #class Soldier
-    def __init__(self,id,team,gofh=False):
-        Unit.__init__(self,id,team)
+    def __init__(self,id,team_name,gofh=False):
+        Unit.__init__(self,id,team_name)
         self.gofh=gofh
     def goin_to_the_hero(self):
         #method going fo the hero
         self.gofh=True
-class Teams:
-    comand = []
-    def __init__(self,team_name):
-        self.team_name=team_name
 
-    def commands(self,s):
-        self.s=s
-        Teams.comand=comand.append(s)
-    def prints(self):
-        print(comand())
+class Team:
+        def __init__(self,team_name):
+            self.team_name=team_name
+            self.team=[]
+
 
 def belonging_to_the_teem():
     #belonging to the team GDI or NOD
     b = random.randint(1, 4)
     if b % 2 == 0:
-        return ('NOD')
+        return (hero_list[0])
     else:
-        return ('GDI')
+        return (hero_list[1])
 def general_lvl_up():
     #determining who lvl up
     if length_GDI > length_NOD:
@@ -67,28 +64,30 @@ def general_lvl_up():
     else:
         generalGDI.lvl_up()
         generalNOD.lvl_up()
+hero_list=[]
 teams_list=[]
+
 generalGDI=Hero(int(uuid.uuid4()),'GDI')
+hero_list.append(generalGDI)
 generalNOD=Hero(int(uuid.uuid4()),'NOD')
-print(teams_list)
-teams_list[0].prints
+hero_list.append(generalNOD)
+
 number_of_soldiers=100
-list_NOD=[]             #list team Nod
-list_GDI=[]             #list team GDI
-''''''
+
 for k in range(number_of_soldiers):
     #generate soldiers and distribute to team NOD or GDI
-    s=Soldier(int(uuid.uuid4()),belonging_to_the_teem())
-    if s.team==teams_list[0].team_name:
-        teams_list[0].commands(s)
+    teams=belonging_to_the_teem()
+    s=Soldier(int(uuid.uuid4()),teams.team_name)
+    if s.team_name==hero_list[0].team.team_name:
+        hero_list[0].team.team.append(s)
     else:
-        teams_list[1].commands(s)
-teams_list[0].prints
+        hero_list[1].team.team.append(s)
+
 ''''''
-#length_NOD=len(teams_list[1])
-#length_GDI=len(teams_list[0])
-#print('команда GDI ',length_GDI,' солдат')
-#print('команда NOD ',length_NOD,' солдат')
+length_GDI=len(hero_list[0].team.team)
+length_NOD=len(hero_list[1].team.team)
+print('команда GDI ',length_GDI,' солдат')
+print('команда NOD ',length_NOD,' солдат')
 
 #general_lvl_up()
 '''
