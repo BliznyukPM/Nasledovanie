@@ -12,7 +12,7 @@
 Отправьте одного из солдат первого героя следовать за ним. Выведите на экран идентификационные номера
 этих двух юнитов.
 '''
-''''''
+
 import random
 import uuid
 
@@ -35,14 +35,16 @@ class Hero(Unit):
 
 class Soldier(Unit):
     #class Soldier
-    def __init__(self,id,team_name,gofh=False):
+    def __init__(self,id,team_name):
         Unit.__init__(self,id,team_name)
-        self.gofh=gofh
-    def goin_to_the_hero(self):
+        self.gtth=1
+    def goin_to_the_hero(self,gtth):
         #method going fo the hero
-        self.gofh=True
+        self.gtth=gtth
+        print('я, ',self.id,' иду за героем ',self.gtth.id)
 
 class Team:
+    #class Teams
         def __init__(self,team_name):
             self.team_name=team_name
             self.team=[]
@@ -65,7 +67,7 @@ def general_lvl_up():
         generalGDI.lvl_up()
         generalNOD.lvl_up()
 hero_list=[]
-teams_list=[]
+
 
 generalGDI=Hero(int(uuid.uuid4()),'GDI')
 hero_list.append(generalGDI)
@@ -83,15 +85,11 @@ for k in range(number_of_soldiers):
     else:
         hero_list[1].team.team.append(s)
 
-''''''
+
 length_GDI=len(hero_list[0].team.team)
 length_NOD=len(hero_list[1].team.team)
 print('команда GDI ',length_GDI,' солдат')
 print('команда NOD ',length_NOD,' солдат')
 
-#general_lvl_up()
-'''
-list_GDI[0].goin_to_the_hero()
-print('id солдата следующего за генералом ',list_GDI[0].id)
-print('id генерала за которым следует солдат ',generalGDI.id)
-'''
+general_lvl_up()
+hero_list[0].team.team[4].goin_to_the_hero(hero_list[0])
